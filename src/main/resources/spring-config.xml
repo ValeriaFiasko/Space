@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+    <context:annotation-config />
+
+    <bean name="astronaut1" class="Entity.Astronaut" >
+        <property name="firstName" value="Valeria"></property>
+        <property name="lastName" value="Fiasko"></property>
+        <property name="age" value="19"></property>
+        <property name="position" value="captain"></property>
+    </bean>
+    <bean name="astronaut2" class="Entity.Astronaut">
+        <property name="firstName" value="Ivan"></property>
+        <property name="lastName" value="Ivanov"></property>
+        <property name="age" value="21"></property>
+        <property name="position" value="engineer"></property>
+    </bean>
+    <bean name="astronaut3" class="Entity.Astronaut">
+        <property name="firstName" value="Elena"></property>
+        <property name="lastName" value="Lenina"></property>
+        <property name="age" value="20"></property>
+        <property name="position" value="pilot"></property>
+    </bean>
+
+    <bean name="spacecraft1" class="Entity.Spacecraft">
+        <property name="name" value="Star-1"></property>
+        <property name="crewCapacity" value="3"></property>
+        <property name="amountFuel" value="1000"></property>
+    </bean>
+    <bean name="spacecraft2" class="Entity.Spacecraft">
+        <property name="name" value="Lucky-1"></property>
+        <property name="crewCapacity" value="2"></property>
+        <property name="amountFuel" value="900"></property>
+    </bean>
+
+    <bean name="trip" class="Entity.Trip">
+        <property name="name" value="to the Moon"></property>
+        <property name="planet" value="Moon"></property>
+        <property name="duration" value="200"></property>
+        <property name="spacecraft" ref="spacecraft1"></property>
+        <property name="astronauts">
+            <list>
+                <ref bean="astronaut1"/>
+                <ref bean="astronaut2"/>
+                <ref bean="astronaut3"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>
