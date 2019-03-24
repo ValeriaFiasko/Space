@@ -5,12 +5,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.*;
 
-import static Entity.Trip.trip;
-
 public class CosmoTripService {
     private ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-config.xml");
     private List<Astronaut> astronaut = new ArrayList<Astronaut>();
     private List<Spacecraft> spacecrafts = new ArrayList<Spacecraft>();
+    private Trip trip;
 
     public CosmoTripService() {
     }

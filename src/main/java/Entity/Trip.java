@@ -10,7 +10,7 @@ public class Trip {
     private Spacecraft spacecraft;
     private String planet;
     private int duration;
-    public static Trip trip;
+    private static Trip trip;
 
     public static synchronized Trip getInstance() {
         if (trip == null) {
