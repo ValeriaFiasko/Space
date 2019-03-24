@@ -10,6 +10,14 @@ public class Trip {
     private Spacecraft spacecraft;
     private String planet;
     private int duration;
+    public static Trip trip;
+
+    public static synchronized Trip getInstance() {
+        if (trip == null) {
+            trip = new Trip();
+        }
+        return trip;
+    }
 
     @Override
     public String toString() {
@@ -21,4 +29,5 @@ public class Trip {
                 "duration=" + duration + " days" +
                 '}';
     }
+
 }

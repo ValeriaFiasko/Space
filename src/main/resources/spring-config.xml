@@ -17,10 +17,10 @@
     </bean>
     <bean name="astronaut2" class="Entity.Astronaut">
         <property name="firstName" value="Ivan"></property>
-        <property name="lastName" value="Ivanov"></property>
-        <property name="age" value="21"></property>
-        <property name="position" value="engineer"></property>
-    </bean>
+    <property name="lastName" value="Ivanov"></property>
+    <property name="age" value="21"></property>
+    <property name="position" value="engineer"></property>
+</bean>
     <bean name="astronaut3" class="Entity.Astronaut">
         <property name="firstName" value="Elena"></property>
         <property name="lastName" value="Lenina"></property>
@@ -43,14 +43,7 @@
         <property name="name" value="to the Moon"></property>
         <property name="planet" value="Moon"></property>
         <property name="duration" value="200"></property>
-        <property name="spacecraft" ref="spacecraft1"></property>
-        <property name="astronauts">
-            <list>
-                <ref bean="astronaut1"/>
-                <ref bean="astronaut2"/>
-                <ref bean="astronaut3"/>
-            </list>
-        </property>
     </bean>
+
 
 </beans>

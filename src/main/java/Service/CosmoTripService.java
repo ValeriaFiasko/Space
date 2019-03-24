@@ -3,34 +3,55 @@ import Entity.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+
+import static Entity.Trip.trip;
 
 public class CosmoTripService {
-    private Trip trip;
-    List<Astronaut> astronaut;
-    List<Spacecraft> spacecrafts;
+    private ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-config.xml");
+    private List<Astronaut> astronaut = new ArrayList<Astronaut>();
+    private List<Spacecraft> spacecrafts = new ArrayList<Spacecraft>();
 
     public CosmoTripService() {
     }
 
-    public void generate(){
-        System.out.println("here");
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-config.xml");
+    public void generateStarcraft(){
+        for (int i = 0; i < 2; i++)
+        {
+            spacecrafts.add(applicationContext.getBean("spacecraft" + (i+1),Entity.Spacecraft.class));
+        }
+        System.out.println("Now we choosing spacecraft");
+        new Random().ints(0, spacecrafts.size()).limit(1).forEach(p -> trip.setSpacecraft(spacecrafts.get(p)));
+        System.out.println(trip.getSpacecraft());
+    }
 
+    public void generateListOfAstronauts(){
         for (int i = 0; i < 3; i++)
         {
-            // Map map = applicationContext.getBeansOfType(Entity.Astronaut.class);
-            System.out.println(applicationContext.getBean("astronaut" + i,Entity.Astronaut.class));
             astronaut.add(applicationContext.getBean("astronaut" + (i+1),Entity.Astronaut.class));
-            System.out.println(astronaut.get((i)));
         }
-     //  new Random().ints(0, map.size()).limit(3).forEach(p -> System.out.println(map.get(p)));
+        System.out.println("Now we choosing astronauts");
+        List<Astronaut> finalAstronauts = getRandomElements(trip.getSpacecraft().getCrewCapacity(), astronaut);
+        System.out.println(finalAstronauts);
+        trip.setAstronauts(finalAstronauts);
+}
+
+    public List<Astronaut> getRandomElements(final int amount, final List<Astronaut> list) {
+        ArrayList<Astronaut> returnList = new ArrayList<Astronaut>(list);
+        Collections.shuffle(returnList); // тут делаем рандом
+        if (returnList.size() >= amount) { // отрезаем не нужную часть
+            // тут отрезаем не нужную часть
+            returnList.subList(amount, returnList.size()).clear();
+        }
+        return returnList;
     }
 
     public void getTrip(){
-
+        trip = Trip.getInstance();
+        trip = (Trip) applicationContext.getBean("trip");
+        generateStarcraft();
+        generateListOfAstronauts();
+        System.out.println(trip);
     }
 
 }
